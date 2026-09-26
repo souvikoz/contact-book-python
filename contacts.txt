@@ -1,0 +1,122 @@
+while True:
+    print("\n========== CONTACT BOOK ==========")
+    print("1. Add Contact")
+    print("2. View Contacts")
+    print("3. Search Contact")
+    print("4. Exit")
+    print("==================================")
+
+    choice = input("Enter your choice: ")
+
+    # Add Contact
+    if choice == "1":
+        name = input("Enter name: ")
+        phone = input("Enter phone number: ")
+        email = input("Enter email: ")
+
+        with open("contacts.txt", "a") as file:
+            file.write("Name: " + name + "\n")
+            file.write("Phone: " + phone + "\n")
+            file.write("Email: " + email + "\n")
+            file.write("-------------------------\n")
+
+        print("Contact added successfully!")
+
+    # View Contacts
+    elif choice == "2":
+        try:
+            with open("contacts.txt", "r") as file:
+                data = file.read()
+
+            if data == "":
+                print("No contacts found.")
+
+            else:
+                print("\n========== SAVED CONTACTS ==========")
+                print(data)
+
+        except FileNotFoundError:
+            print("No contacts found.")
+
+    # Search Contact
+    elif choice == "3":
+        search_name = input("Enter name to search: ")
+
+        try:
+            with open("contacts.txt", "r") as file:
+                data = file.readlines()
+
+            found = False
+
+            for line in data:
+                if line.startswith("Name:"):
+                    name = line.replace("Name:", "").strip()
+
+                    if name.lower() == search_name.lower():
+                        print("\nContact Found:")
+                        print(line.strip())
+
+                        index = data.index(line)
+
+                        if index + 1 < len(data):
+                            print(data[index + 1].strip())
+
+                        if index + 2 < len(data):
+                            print(data[index + 2].strip())
+
+                        found = True
+                        break
+
+            if found == False:
+                print("Contact not found.")
+
+        except FileNotFoundError:
+            print("No contacts found.")
+
+    # Exit
+    elif choice == "4":
+        print("Thank you for using Contact Book!")
+        break
+
+    # Invalid choice
+    else:
+        print("Invalid choice. Please enter 1, 2, 3, or 4.")Name: souvik
+Phone: 7029
+Email: se
+-------------------------
+Name: souvil
+Phone: sss
+Email: 
+-------------------------
+Name: sou
+Phone: 7029
+Email: souvi
+-------------------------
+Name: ami
+Phone: je
+Email: tomar
+-------------------------
+Name: so
+Phone: 56
+Email: 55
+-------------------------
+Name: do
+Phone: jj
+Email: bn
+-------------------------
+Name: souvik
+Phone: 7029
+Email: sou
+-------------------------
+Name: aa
+Phone: bb
+Email: cc
+-------------------------
+Name: ss
+Phone: ss
+Email: ss
+-------------------------
+Name: souvik
+Phone: 7056
+Email: 66
+-------------------------
